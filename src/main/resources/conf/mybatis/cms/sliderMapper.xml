@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SliderModel">
+  <resultMap id="BaseResultMap" type="SliderModel">
+    <id column="id" property="id" />
+    <result column="image" property="image" />
+    <result column="title" property="title" />
+    <result column="url" property="url" />
+    <result column="order_num" property="orderNum" />
+    <result column="position_id" property="positionId" />
+  </resultMap>
+  <sql id="base_column">
+    image,title,url,order_num
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="image != null">
+        image,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="image != null">
+        #{image},
+      </if>
+      <if test="title != null">
+        #{title},
+      </if>
+      <if test="url != null">
+        #{url},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum},
+      </if>
+      <if test="positionId != null">
+        #{positionId},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="SliderModel">
+    insert into slider(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update slider
+    <set>
+      <if test="value != null and value.image != null">
+        image = #{value.image},
+      </if>
+      <if test="value != null and value.title != null">
+        title = #{value.title},
+      </if>
+      <if test="value != null and value.url != null">
+        url = #{value.url},
+      </if>
+      <if test="value != null and value.orderNum != null">
+        order_num = #{value.orderNum},
+      </if>
+      <if test="value != null and value.positionId != null">
+        position_id = #{value.positionId},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from slider <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from slider <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from slider <include refid="dynamic_where"/>
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.image != null">
+        and image = #{input.image}
+      </if>
+      <if test="input != null and input.title != null">
+        and title = #{input.title}
+      </if>
+      <if test="input != null and input.url != null">
+        and url = #{input.url}
+      </if>
+      <if test="input != null and input.orderNum != null">
+        and order_num = #{input.orderNum}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.positionId != null">
+        and position_id = #{input.positionId}
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.image != null">
+        image,
+      </if>
+      <if test="output != null and output.title != null">
+        title,
+      </if>
+      <if test="output != null and output.url != null">
+        url,
+      </if>
+      <if test="output != null and output.orderNum != null">
+        order_num,
+      </if>
+      <if test="output != null and output.positionId != null">
+        position_id,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+    </trim>
+  </sql>
+</mapper>

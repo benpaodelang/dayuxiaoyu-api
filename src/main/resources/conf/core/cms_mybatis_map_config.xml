@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="logPrefix" value="dao." />
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.CategoryModel" alias="CategoryModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.HouseModel" alias="HouseModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.ImmigrationModel" alias="ImmigrationModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.NewModel" alias="NewModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.NewTagModel" alias="NewTagModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.PassportModel" alias="PassportModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.TagModel" alias="TagModel"/>
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.AdvisoryModel" alias="AdvisoryModel" />
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.VideoModel" alias="VideoModel" />
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.SliderModel" alias="SliderModel" />
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.SliderPositionModel" alias="SliderPositionModel" />
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.RecommendModel" alias="RecommendModel" />
+        <typeAlias type="com.dayuxiaoyu.api.model.cms.CountryModel" alias="CountryModel" />
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="conf/mybatis/cms/categoryMapper.xml" />
+        <mapper resource="conf/mybatis/cms/houseMapper.xml" />
+        <mapper resource="conf/mybatis/cms/immigrationMapper.xml" />
+        <mapper resource="conf/mybatis/cms/newMapper.xml" />
+        <mapper resource="conf/mybatis/cms/newTagMapper.xml" />
+        <mapper resource="conf/mybatis/cms/passportMapper.xml" />
+        <mapper resource="conf/mybatis/cms/tagMapper.xml" />
+        <mapper resource="conf/mybatis/cms/advisoryMapper.xml" />
+        <mapper resource="conf/mybatis/cms/videoMapper.xml" />
+        <mapper resource="conf/mybatis/cms/sliderMapper.xml" />
+        <mapper resource="conf/mybatis/cms/sliderPositionMapper.xml" />
+        <mapper resource="conf/mybatis/cms/recommendMapper.xml" />
+        <mapper resource="conf/mybatis/cms/countryMapper.xml" />
+    </mappers>
+
+</configuration>

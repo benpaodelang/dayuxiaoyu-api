@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseModel">
+  <resultMap id="BaseResultMap" type="HouseModel">
+    <id column="id" property="id" />
+    <result column="picture" property="picture" />
+    <result column="videos" property="videos" />
+    <result column="title" property="title" />
+    <result column="description" property="description" />
+    <result column="price" property="price" />
+    <result column="price_unit" property="priceUnit" />
+    <result column="country" property="country" />
+    <result column="content" property="content" />
+    <result column="region" property="region" />
+    <result column="area" property="area" />
+    <result column="floor" property="floor" />
+    <result column="house_type" property="houseType" />
+    <result column="elevator" property="elevator" />
+    <result column="income" property="income" />
+    <result column="huxing" property="huxing" />
+    <result column="status" property="status" />
+    <result column="create_time" property="createTime" />
+  </resultMap>
+  <sql id="base_column">
+    picture,videos,title,description,price,price_unit,country,content,region,area,floor,house_type,elevator,income,huxing,status,create_time
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="videos != null">
+        videos,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="priceUnit != null">
+        price_unit,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="elevator != null">
+        elevator,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="huxing != null">
+        huxing,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="picture != null">
+        #{picture},
+      </if>
+      <if test="videos != null">
+        #{videos},
+      </if>
+      <if test="title != null">
+        #{title},
+      </if>
+      <if test="description != null">
+        #{description},
+      </if>
+      <if test="price != null">
+        #{price},
+      </if>
+      <if test="priceUnit != null">
+        #{priceUnit},
+      </if>
+      <if test="country != null">
+        #{country},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+      <if test="region != null">
+        #{region},
+      </if>
+      <if test="area != null">
+        #{area},
+      </if>
+      <if test="floor != null">
+        #{floor},
+      </if>
+      <if test="houseType != null">
+        #{houseType},
+      </if>
+      <if test="elevator != null">
+        #{elevator},
+      </if>
+      <if test="income != null">
+        #{income},
+      </if>
+      <if test="huxing != null">
+        #{huxing},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="createTime != null">
+        #{createTim},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="HouseModel">
+    insert into house(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update house
+    <set>
+      <if test="value != null and value.picture != null">
+        picture = #{value.picture},
+      </if>
+      <if test="value != null and value.videos != null">
+        videos = #{value.videos},
+      </if>
+      <if test="value != null and value.title != null">
+        title = #{value.title},
+      </if>
+      <if test="value != null and value.description != null">
+        description = #{value.description},
+      </if>
+      <if test="value != null and value.price != null">
+        price = #{value.price},
+      </if>
+      <if test="value != null and value.priceUnit != null">
+        price_unit = #{value.priceUnit},
+      </if>
+      <if test="value != null and value.country != null">
+        country = #{value.country},
+      </if>
+      <if test="value != null and value.content != null">
+        content = #{value.content},
+      </if>
+      <if test="value != null and value.region != null">
+        region = #{value.region},
+      </if>
+      <if test="value != null and value.area != null">
+        area = #{value.area},
+      </if>
+      <if test="value != null and value.floor != null">
+        floor = #{value.floor},
+      </if>
+      <if test="value != null and value.houseType != null">
+        house_type = #{value.houseType},
+      </if>
+      <if test="value != null and value.elevator != null">
+        elevator = #{value.elevator},
+      </if>
+      <if test="value != null and value.income != null">
+        income = #{value.income},
+      </if>
+      <if test="value != null and value.huxing != null">
+        huxing = #{value.huxing},
+      </if>
+      <if test="value != null and value.status != null">
+        status = #{value.status},
+      </if>
+      <if test="value != null and value.createTime != null">
+        create_time = #{value.createTim},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from house <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from house <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from house <include refid="dynamic_where"/> order by create_time desc
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.picture != null">
+        and picture = #{input.picture}
+      </if>
+      <if test="input != null and input.videos != null">
+        and videos = #{input.videos}
+      </if>
+      <if test="input != null and input.title != null">
+        and title = #{input.title}
+      </if>
+      <if test="input != null and input.titleQuery != null">
+        and title LIKE concat(#{input.titleQuery},'%')
+      </if>
+      <if test="input != null and input.description != null">
+        and description = #{input.description}
+      </if>
+      <if test="input != null and input.price != null">
+        and price = #{input.price}
+      </if>
+      <if test="input != null and input.priceFrom != null">
+        and price &gt;= #{input.priceFrom}
+      </if>
+      <if test="input != null and input.priceTo != null">
+        and price &lt;= #{input.priceTo}
+      </if>
+      <if test="input != null and input.priceUnit != null">
+        and price_unit = #{input.priceUnit}
+      </if>
+      <if test="input != null and input.country != null">
+        and country = #{input.country}
+      </if>
+      <if test="input != null and input.content != null">
+        and content = #{input.content}
+      </if>
+      <if test="input != null and input.region != null">
+        and region = #{input.region}
+      </if>
+      <if test="input != null and input.area != null">
+        and area = #{input.area}
+      </if>
+      <if test="input != null and input.floor != null">
+        and floor = #{input.floor}
+      </if>
+      <if test="input != null and input.houseType != null">
+        and house_type = #{input.houseType}
+      </if>
+      <if test="input != null and input.elevator != null">
+        and elevator = #{input.elevator}
+      </if>
+      <if test="input != null and input.income != null">
+        and income = #{input.income}
+      </if>
+      <if test="input != null and input.huxing != null">
+        and huxing = #{input.huxing}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.createTime != null">
+        and create_time = #{input.createTime}
+      </if>
+      <if test="input != null and input.status != null">
+        and status = #{input.status}
+      </if>
+      <if test="input != null and input.inIdList != null and input.inIdList.size >0 ">
+        and id in <foreach collection="input.inIdList" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.picture != null">
+        picture,
+      </if>
+      <if test="output != null and output.videos != null">
+        videos,
+      </if>
+      <if test="output != null and output.title != null">
+        title,
+      </if>
+      <if test="output != null and output.description != null">
+        description,
+      </if>
+      <if test="output != null and output.price != null">
+        price,
+      </if>
+      <if test="output != null and output.priceUnit != null">
+        price_unit,
+      </if>
+      <if test="output != null and output.country != null">
+        country,
+      </if>
+      <if test="output != null and output.content != null">
+        content,
+      </if>
+      <if test="output != null and output.region != null">
+        region,
+      </if>
+      <if test="output != null and output.area != null">
+        area,
+      </if>
+      <if test="output != null and output.floor != null">
+        floor,
+      </if>
+      <if test="output != null and output.houseType != null">
+        house_type,
+      </if>
+      <if test="output != null and output.elevator != null">
+        elevator,
+      </if>
+      <if test="output != null and output.income != null">
+        income,
+      </if>
+      <if test="output != null and output.huxing != null">
+        huxing,
+      </if>
+      <if test="output != null and output.status != null">
+        status,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+      <if test="output != null and output.createTime != null">
+        create_time,
+      </if>
+    </trim>
+  </sql>
+</mapper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NewTagModel">
+  <resultMap id="BaseResultMap" type="NewTagModel">
+    <id column="id" property="id" />
+    <result column="new_id" property="newId" />
+    <result column="tag_id" property="tagId" />
+  </resultMap>
+  <sql id="base_column">
+    new_id,tag_id
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="newId != null">
+        new_id,
+      </if>
+      <if test="tagId != null">
+        tag_id,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="newId != null">
+        #{newId},
+      </if>
+      <if test="tagId != null">
+        #{tagId},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="NewTagModel">
+    insert into new_tag(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update new_tag
+    <set>
+      <if test="value != null and value.newId != null">
+        new_id = #{value.newId},
+      </if>
+      <if test="value != null and value.tagId != null">
+        tag_id = #{value.tagId},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from new_tag <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from new_tag <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from new_tag <include refid="dynamic_where"/>
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.newId != null">
+        and new_id = #{input.newId}
+      </if>
+      <if test="input != null and input.tagId != null">
+        and tag_id = #{input.tagId}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.inIdList != null and input.inIdList.size >0 ">
+        and id in <foreach collection="input.inIdList" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.newId != null">
+        new_id,
+      </if>
+      <if test="output != null and output.tagId != null">
+        tag_id,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+    </trim>
+  </sql>
+</mapper>

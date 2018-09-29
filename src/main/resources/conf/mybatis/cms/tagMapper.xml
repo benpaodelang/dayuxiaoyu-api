@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TagModel">
+  <resultMap id="BaseResultMap" type="TagModel">
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+  </resultMap>
+  <sql id="base_column">
+    name
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="name != null">
+        #{name},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="TagModel">
+    insert into tag(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update tag
+    <set>
+      <if test="value != null and value.name != null">
+        name = #{value.name},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from tag <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from tag <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from tag <include refid="dynamic_where"/>
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.name != null">
+        and name = #{input.name}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.name != null">
+        name,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+    </trim>
+  </sql>
+</mapper>

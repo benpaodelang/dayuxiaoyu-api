@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdvisoryModel">
+  <resultMap id="BaseResultMap" type="AdvisoryModel">
+    <id column="id" property="id" />
+    <result column="country" property="country" />
+    <result column="name" property="name" />
+    <result column="phone" property="phone" />
+    <result column="create_time" property="createTime" />
+    <result column="status" property="status" />
+    <result column="immigration_request" property="immigrationRequest" />
+    <result column="time_request" property="timeRequest" />
+    <result column="business_experience" property="businessExperience" />
+    <result column="price_request" property="priceRequest" />
+    <result column="overseas_experience" property="overseasExperience" />
+    <result column="risk_tolerance" property="riskTolerance" />
+  </resultMap>
+  <sql id="base_column">
+    country,name,phone,create_time,status,immigration_request,time_request,business_experience,price_request,overseas_experience,risk_tolerance
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="country != null">
+        country,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="immigrationRequest != null">
+        immigration_request,
+      </if>
+      <if test="timeRequest != null">
+        time_request,
+      </if>
+      <if test="businessExperience != null">
+        business_experience,
+      </if>
+      <if test="priceRequest != null">
+        price_request,
+      </if>
+      <if test="overseasExperience != null">
+        overseas_experience,
+      </if>
+      <if test="riskTolerance != null">
+        risk_tolerance,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="country != null">
+        #{country},
+      </if>
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="immigrationRequest != null">
+        #{immigrationRequest},
+      </if>
+      <if test="timeRequest != null">
+        #{timeRequest},
+      </if>
+      <if test="businessExperience != null">
+        #{businessExperience},
+      </if>
+      <if test="priceRequest != null">
+        #{priceRequest},
+      </if>
+      <if test="overseasExperience != null">
+        #{overseasExperience},
+      </if>
+      <if test="riskTolerance != null">
+        #{riskTolerance},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="AdvisoryModel">
+    insert into advisory(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update advisory
+    <set>
+      <if test="value != null and value.country != null">
+        country = #{value.country},
+      </if>
+      <if test="value != null and value.name != null">
+        name = #{value.name},
+      </if>
+      <if test="value != null and value.phone != null">
+        phone = #{value.phone},
+      </if>
+      <if test="value != null and value.createTime != null">
+        create_time = #{value.createTime},
+      </if>
+      <if test="value != null and value.status != null">
+        status = #{value.status},
+      </if>
+      <if test="value != null and value.immigrationRequest != null">
+        immigration_request = #{value.immigrationRequest},
+      </if>
+      <if test="value != null and value.timeRequest != null">
+        time_request = #{value.timeRequest},
+      </if>
+      <if test="value != null and value.businessExperience != null">
+        business_experience = #{value.businessExperience},
+      </if>
+      <if test="value != null and value.priceRequest != null">
+        price_request = #{value.priceRequest},
+      </if>
+      <if test="value != null and value.overseasExperience != null">
+        overseas_experience = #{value.overseasExperience},
+      </if>
+      <if test="value != null and value.riskTolerance != null">
+        risk_tolerance = #{value.riskTolerance},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from advisory <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from advisory <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from advisory <include refid="dynamic_where"/> order by create_time desc
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.country != null">
+        and country = #{input.country}
+      </if>
+      <if test="input != null and input.name != null">
+        and name = #{input.name}
+      </if>
+      <if test="input != null and input.phone != null">
+        and phone = #{input.phone}
+      </if>
+      <if test="input != null and input.createTime != null">
+        and create_time = #{input.createTime}
+      </if>
+      <if test="input != null and input.createTimeUp != null">
+        and create_time &lt;= #{input.createTimeUp}
+      </if>
+      <if test="input != null and input.createTimeDown != null">
+        and create_time &gt;= #{input.createTimeDown}
+      </if>
+      <if test="input != null and input.status != null">
+        and status = #{input.status}
+      </if>
+      <if test="input != null and input.immigrationRequest != null">
+        and immigration_request = #{input.immigrationRequest}
+      </if>
+      <if test="input != null and input.timeRequest != null">
+        and time_request = #{input.timeRequest}
+      </if>
+      <if test="input != null and input.businessExperience != null">
+        and business_experience = #{input.businessExperience}
+      </if>
+      <if test="input != null and input.priceRequest != null">
+        and price_request = #{input.priceRequest}
+      </if>
+      <if test="input != null and input.overseasExperience != null">
+        and overseas_experience = #{input.overseasExperience}
+      </if>
+      <if test="input != null and input.riskTolerance != null">
+        and risk_tolerance = #{input.riskTolerance}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.inIdList != null and input.inIdList.size >0 ">
+        and id in <foreach collection="input.inIdList" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.country != null">
+        country,
+      </if>
+      <if test="output != null and output.name != null">
+        name,
+      </if>
+      <if test="output != null and output.phone != null">
+        phone,
+      </if>
+      <if test="output != null and output.createTime != null">
+        create_time,
+      </if>
+      <if test="output != null and output.status != null">
+        status,
+      </if>
+      <if test="output != null and output.immigrationRequest != null">
+        immigration_request,
+      </if>
+      <if test="output != null and output.timeRequest != null">
+        time_request,
+      </if>
+      <if test="output != null and output.businessExperience != null">
+        business_experience,
+      </if>
+      <if test="output != null and output.priceRequest != null">
+        price_request,
+      </if>
+      <if test="output != null and output.overseasExperience != null">
+        overseas_experience,
+      </if>
+      <if test="output != null and output.riskTolerance != null">
+        risk_tolerance,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+    </trim>
+  </sql>
+</mapper>

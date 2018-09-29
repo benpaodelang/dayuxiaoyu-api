@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PassportModel">
+  <resultMap id="BaseResultMap" type="PassportModel">
+    <id column="id" property="id" />
+    <result column="title" property="title" />
+    <result column="picture" property="picture" />
+    <result column="price_detail" property="priceDetail" />
+    <result column="project_benefits" property="projectBenefits" />
+    <result column="application_process" property="applicationProcess" />
+    <result column="application_condition" property="applicationCondition" />
+    <result column="country_instroduction" property="countryInstroduction" />
+    <result column="success_case" property="successCase" />
+    <result column="price" property="price" />
+    <result column="period" property="period" />
+    <result column="identity_type" property="identityType" />
+    <result column="living_requirement" property="livingRequirement" />
+    <result column="criminal_record" property="criminalRecord" />
+    <result column="create_time" property="createTime" />
+    <result column="order_num" property="orderNum" />
+    <result column="status" property="status" />
+    <result column="videos" property="videos" />
+    <result column="houses" property="houses" />
+    <result column="country" property="country" />
+    <result column="description" property="description" />
+    <result column="sub_title" property="subTitle" />
+  </resultMap>
+  <sql id="base_column">
+    title,picture,price_detail,project_benefits,application_process,application_condition,country_instroduction,success_case,price,period,identity_type,living_requirement,criminal_record,create_time,order_num,status,videos,house,country,sub_title,description
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="priceDetail != null">
+        price_detail,
+      </if>
+      <if test="projectBenefits != null">
+        project_benefits,
+      </if>
+      <if test="applicationProcess != null">
+        application_process,
+      </if>
+      <if test="applicationCondition != null">
+        application_condition,
+      </if>
+      <if test="countryInstroduction != null">
+        country_instroduction,
+      </if>
+      <if test="successCase != null">
+        success_case,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="identityType != null">
+        identity_type,
+      </if>
+      <if test="livingRequirement != null">
+        living_requirement,
+      </if>
+      <if test="criminalRecord != null">
+        criminal_record,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="videos != null">
+        videos,
+      </if>
+      <if test="houses != null">
+        houses,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="subTitle != null">
+        sub_title,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="title != null">
+        #{title},
+      </if>
+      <if test="picture != null">
+        #{picture},
+      </if>
+      <if test="priceDetail != null">
+        #{priceDetail},
+      </if>
+      <if test="projectBenefits != null">
+        #{projectBenefits},
+      </if>
+      <if test="applicationProcess != null">
+        #{applicationProcess},
+      </if>
+      <if test="applicationCondition != null">
+        #{applicationCondition},
+      </if>
+      <if test="countryInstroduction != null">
+        #{countryInstroduction},
+      </if>
+      <if test="successCase != null">
+        #{successCase},
+      </if>
+      <if test="price != null">
+        #{price},
+      </if>
+      <if test="period != null">
+        #{period},
+      </if>
+      <if test="identityType != null">
+        #{identityType},
+      </if>
+      <if test="livingRequirement != null">
+        #{livingRequirement},
+      </if>
+      <if test="criminalRecord != null">
+        #{criminalRecord},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="videos != null">
+        #{videos},
+      </if>
+      <if test="houses != null">
+        #{houses},
+      </if>
+      <if test="description != null">
+        #{description},
+      </if>
+      <if test="subTitle != null">
+        #{subTitle},
+      </if>
+      <if test="country != null">
+        #{country},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="PassportModel">
+    insert into passport(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update passport
+    <set>
+      <if test="value != null and value.title != null">
+        title = #{value.title},
+      </if>
+      <if test="value != null and value.picture != null">
+        picture = #{value.picture},
+      </if>
+      <if test="value != null and value.priceDetail != null">
+        price_detail = #{value.priceDetail},
+      </if>
+      <if test="value != null and value.projectBenefits != null">
+        project_benefits = #{value.projectBenefits},
+      </if>
+      <if test="value != null and value.applicationProcess != null">
+        application_process = #{value.applicationProcess},
+      </if>
+      <if test="value != null and value.applicationCondition != null">
+        application_condition = #{value.applicationCondition},
+      </if>
+      <if test="value != null and value.countryInstroduction != null">
+        country_instroduction = #{value.countryInstroduction},
+      </if>
+      <if test="value != null and value.successCase != null">
+        success_case = #{value.successCase},
+      </if>
+      <if test="value != null and value.price != null">
+        price = #{value.price},
+      </if>
+      <if test="value != null and value.period != null">
+        period = #{value.period},
+      </if>
+      <if test="value != null and value.identityType != null">
+        identity_type = #{value.identityType},
+      </if>
+      <if test="value != null and value.livingRequirement != null">
+        living_requirement = #{value.livingRequirement},
+      </if>
+      <if test="value != null and value.criminalRecord != null">
+        criminal_record = #{value.criminalRecord},
+      </if>
+      <if test="value != null and value.createTime != null">
+        create_time = #{value.createTime},
+      </if>
+      <if test="value != null and value.orderNum != null">
+        order_num = #{value.orderNum},
+      </if>
+      <if test="value != null and value.status != null">
+        status = #{value.status},
+      </if>
+      <if test="value != null and value.videos != null">
+        videos = #{value.videos},
+      </if>
+      <if test="value != null and value.houses != null">
+        houses = #{value.houses},
+      </if>
+      <if test="value != null and value.description != null">
+        description = #{value.description},
+      </if>
+      <if test="value != null and value.country != null">
+        country = #{value.country},
+      </if>
+      <if test="value != null and value.subTitle != null">
+        sub_title = #{value.subTitle},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from passport <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from passport <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from passport <include refid="dynamic_where"/> order by order_num asc
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.title != null">
+        and title = #{input.title}
+      </if>
+      <if test="input != null and input.picture != null">
+        and picture = #{input.picture}
+      </if>
+      <if test="input != null and input.priceDetail != null">
+        and price_detail = #{input.priceDetail}
+      </if>
+      <if test="input != null and input.projectBenefits != null">
+        and project_benefits = #{input.projectBenefits}
+      </if>
+      <if test="input != null and input.applicationProcess != null">
+        and application_process = #{input.applicationProcess}
+      </if>
+      <if test="input != null and input.applicationCondition != null">
+        and application_condition = #{input.applicationCondition}
+      </if>
+      <if test="input != null and input.countryInstroduction != null">
+        and country_instroduction = #{input.countryInstroduction}
+      </if>
+      <if test="input != null and input.successCase != null">
+        and success_case = #{input.successCase}
+      </if>
+      <if test="input != null and input.price != null">
+        and price = #{input.price}
+      </if>
+      <if test="input != null and input.period != null">
+        and period = #{input.period}
+      </if>
+      <if test="input != null and input.identityType != null">
+        and identity_type = #{input.identityType}
+      </if>
+      <if test="input != null and input.livingRequirement != null">
+        and living_requirement = #{input.livingRequirement}
+      </if>
+      <if test="input != null and input.criminalRecord != null">
+        and criminal_record = #{input.criminalRecord}
+      </if>
+      <if test="input != null and input.createTime != null">
+        and create_time = #{input.createTime}
+      </if>
+      <if test="input != null and input.orderNum != null">
+        and order_num = #{input.orderNum}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.status != null">
+        and status = #{input.status}
+      </if>
+      <if test="input != null and input.videos != null">
+        and videos = #{input.videos}
+      </if>
+      <if test="input != null and input.houses != null">
+        and houses = #{input.houses}
+      </if>
+      <if test="input != null and input.description != null">
+        and description = #{input.description}
+      </if>
+      <if test="input != null and input.country != null">
+        and country = #{input.country}
+      </if>
+      <if test="input != null and input.subTitle != null">
+        and sub_title = #{input.subTitle}
+      </if>
+      <if test="input != null and input.inIdList != null and input.inIdList.size >0 ">
+        and id in <foreach collection="input.inIdList" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.title != null">
+        title,
+      </if>
+      <if test="output != null and output.picture != null">
+        picture,
+      </if>
+      <if test="output != null and output.priceDetail != null">
+        price_detail,
+      </if>
+      <if test="output != null and output.projectBenefits != null">
+        project_benefits,
+      </if>
+      <if test="output != null and output.applicationProcess != null">
+        application_process,
+      </if>
+      <if test="output != null and output.applicationCondition != null">
+        application_condition,
+      </if>
+      <if test="output != null and output.countryInstroduction != null">
+        country_instroduction,
+      </if>
+      <if test="output != null and output.successCase != null">
+        success_case,
+      </if>
+      <if test="output != null and output.price != null">
+        price,
+      </if>
+      <if test="output != null and output.period != null">
+        period,
+      </if>
+      <if test="output != null and output.identityType != null">
+        identity_type,
+      </if>
+      <if test="output != null and output.livingRequirement != null">
+        living_requirement,
+      </if>
+      <if test="output != null and output.criminalRecord != null">
+        criminal_record,
+      </if>
+      <if test="output != null and output.createTime != null">
+        create_time,
+      </if>
+      <if test="output != null and output.orderNum != null">
+        order_num,
+      </if>
+      <if test="output != null and output.videos!= null">
+        videos,
+      </if>
+      <if test="output != null and output.houses != null">
+        houses,
+      </if>
+      <if test="output != null and output.status != null">
+        status,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+      <if test="output != null and output.country != null">
+        country,
+      </if>
+      <if test="output != null and output.description != null">
+        description,
+      </if>
+      <if test="output != null and output.subTitle != null">
+        sub_title,
+      </if>
+    </trim>
+  </sql>
+</mapper>

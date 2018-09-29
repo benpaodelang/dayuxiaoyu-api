@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CategoryModel">
+  <resultMap id="BaseResultMap" type="CategoryModel">
+    <id column="id" property="id" />
+    <result column="parent_id" property="parentId" />
+    <result column="name" property="name" />
+    <result column="icon" property="icon" />
+    <result column="type" property="type" />
+    <result column="display" property="display" />
+    <result column="path" property="path" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="order_num" property="orderNum" />
+    <result column="content" property="content" />
+  </resultMap>
+  <sql id="base_column">
+    parent_id,name,icon,type,display,path,create_time,update_time,order_num,content
+  </sql>
+  <sql id="all_column">
+    id,<include refid="base_column"/>
+  </sql>
+  <sql id="insertColumns">
+    <trim suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="display != null">
+        display,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+  </sql>
+  <sql id="insertValues">
+    <trim suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId},
+      </if>
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="icon != null">
+        #{icon},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="display != null">
+        #{display},
+      </if>
+      <if test="path != null">
+        #{path},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+    </trim>
+  </sql>
+  <insert id="addEntity" parameterType="CategoryModel">
+    insert into category(<include refid="insertColumns"/>) values (<include refid="insertValues"/>)
+  </insert>
+  <update id="updateEntityByCond" parameterType="java.util.Map">
+    update category
+    <set>
+      <if test="value != null and value.parentId != null">
+        parent_id = #{value.parentId},
+      </if>
+      <if test="value != null and value.name != null">
+        name = #{value.name},
+      </if>
+      <if test="value != null and value.icon != null">
+        icon = #{value.icon},
+      </if>
+      <if test="value != null and value.type != null">
+        type = #{value.type},
+      </if>
+      <if test="value != null and value.display != null">
+        display = #{value.display},
+      </if>
+      <if test="value != null and value.path != null">
+        path = #{value.path},
+      </if>
+      <if test="value != null and value.createTime != null">
+        create_time = #{value.createTime},
+      </if>
+      <if test="value != null and value.updateTime != null">
+        update_time = #{value.updateTime},
+      </if>
+      <if test="value != null and value.orderNum != null">
+        order_num = #{value.orderNum},
+      </if>
+      <if test="value != null and value.content != null">
+        content = #{value.content},
+      </if>
+    </set>
+    <include refid="dynamic_where" />
+  </update>
+  <delete id="deleteEntity" parameterType="java.util.Map">
+    delete from category <include refid="dynamic_where" />
+  </delete>
+  <select id="findEntityById" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from category <include refid="dynamic_where"/>
+  </select>
+  <select id="findEntityListByCond" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select <include refid="dynamic_output"/> from category <include refid="dynamic_where"/> order by order_num asc
+  </select>
+  <sql id="dynamic_where">
+    <where>
+      <if test="input != null and input.parentId != null">
+        and parent_id = #{input.parentId}
+      </if>
+      <if test="input != null and input.name != null">
+        and name = #{input.name}
+      </if>
+      <if test="input != null and input.icon != null">
+        and icon = #{input.icon}
+      </if>
+      <if test="input != null and input.type != null">
+        and type = #{input.type}
+      </if>
+      <if test="input != null and input.display != null">
+        and display = #{input.display}
+      </if>
+      <if test="input != null and input.path != null">
+        and path = #{input.path}
+      </if>
+      <if test="input != null and input.createTime != null">
+        and create_time = #{input.createTime}
+      </if>
+      <if test="input != null and input.createTimeUp != null">
+        and create_time &lt;= #{input.createTimeUp}
+      </if>
+      <if test="input != null and input.createTimeDown != null">
+        and create_time &gt;= #{input.createTimeDown}
+      </if>
+      <if test="input != null and input.updateTime != null">
+        and update_time = #{input.updateTime}
+      </if>
+      <if test="input != null and input.orderNum != null">
+        and order_num = #{input.orderNum}
+      </if>
+      <if test="input != null and input.id != null">
+        and id = #{input.id}
+      </if>
+      <if test="input != null and input.content != null">
+        and content = #{input.content}
+      </if>
+      <if test="input != null and input.inIdList != null and input.inIdList.size >0 ">
+        and id in <foreach collection="input.inIdList" index="index" item="item" open="(" separator="," close=")"> #{item} </foreach>
+      </if>
+    </where>
+  </sql>
+  <sql id="dynamic_output">
+    <trim suffixOverrides=",">
+      <if test="output != null and output.parentId != null">
+        parent_id,
+      </if>
+      <if test="output != null and output.name != null">
+        name,
+      </if>
+      <if test="output != null and output.icon != null">
+        icon,
+      </if>
+      <if test="output != null and output.type != null">
+        type,
+      </if>
+      <if test="output != null and output.display != null">
+        display,
+      </if>
+      <if test="output != null and output.path != null">
+        path,
+      </if>
+      <if test="output != null and output.createTime != null">
+        create_time,
+      </if>
+      <if test="output != null and output.updateTime != null">
+        update_time,
+      </if>
+      <if test="output != null and output.orderNum != null">
+        order_num,
+      </if>
+      <if test="output != null and output.id != null">
+        id,
+      </if>
+      <if test="output != null and output.content != null">
+        content,
+      </if>
+    </trim>
+  </sql>
+</mapper>

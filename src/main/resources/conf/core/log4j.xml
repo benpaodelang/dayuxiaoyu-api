@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <!--控制台输出-->
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 系统启动日志输出文件 -->
+    <appender name="fileAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/system.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <appender name="actionLogEntityAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/insurance_api_actionlogentity.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- sql 调试日志 -->
+    <logger name="dao" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <!-- /////////////////////收集日志logger开始////////////////////////// -->
+
+    <!-- 1.异常 -->
+    <logger name="errorLogger" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="errorAppender"/>
+    </logger>
+
+    <!-- 2.警告 -->
+    <logger name="warnLogger" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="warnAppender"/>
+    </logger>
+
+    <!-- 3.调试 -->
+    <logger name="debugLogger" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="debugAppender"/>
+    </logger>
+
+    <!-- 4.打点 -->
+    <logger name="eventLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="eventAppender"/>
+    </logger>
+
+    <!-- 5.outIn -->
+    <logger name="outInLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="outInAppender"/>
+    </logger>
+
+    <!-- 6.inOut -->
+    <logger name="inOutLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="inOutAppender"/>
+    </logger>
+
+    <!-- 7.消息 -->
+    <logger name="messageLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="messageAppender"/>
+    </logger>
+
+    <!-- 8.检查 -->
+    <logger name="checkListLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="checkListAppender"/>
+    </logger>
+
+    <!-- 9.cache -->
+    <logger name="cacheLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="cacheAppender"/>
+    </logger>
+
+    <!-- /////////////////////收集日志logger结束////////////////////////// -->
+
+    <!-- /////////////////////查看日志logger开始////////////////////////// -->
+
+    <!-- 1.异常 -->
+    <logger name="errorViewLogger" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="errorViewAppender"/>
+    </logger>
+
+    <!-- 2.警告 -->
+    <logger name="warnViewLogger" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="warnViewAppender"/>
+    </logger>
+
+    <!-- 3.调试 -->
+    <logger name="debugViewLogger" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="debugViewAppender"/>
+    </logger>
+
+    <!-- 4.打点 -->
+    <logger name="eventViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="eventViewAppender"/>
+    </logger>
+
+    <!-- 5.outIn -->
+    <logger name="outInViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="outInViewAppender"/>
+    </logger>
+
+    <!-- 6.inOut -->
+    <logger name="inOutViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="inOutViewAppender"/>
+    </logger>
+
+    <!-- 7.消息 -->
+    <logger name="messageViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="messageViewAppender"/>
+    </logger>
+
+    <!-- 8.检查 -->
+    <logger name="checkListViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="checkListViewAppender"/>
+    </logger>
+
+    <!-- 9.cache -->
+    <logger name="cacheLoggerView" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="cacheViewAppender"/>
+    </logger>
+
+    <logger name="alarmViewLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="alarmViewAppender"/>
+    </logger>
+
+    <category name="actionLogEntityLogger" additivity="true">
+        <level value="INFO"/>
+        <appender-ref ref="actionLogEntityAppender"/>
+    </category>
+
+    <!-- /////////////////////查看日志logger结束////////////////////////// -->
+
+    <!-- ///////////////////////////////收集日志begin///////////////////////////////// -->
+
+    <!-- 1.异常日志 -->
+    <appender name="errorAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/errorCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR"/>
+            <param name="LevelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <!-- 2.warn日志输出文件 -->
+    <appender name="warnAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/warnCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+            <param name="LevelMax" value="WARN"/>
+        </filter>
+    </appender>
+
+    <!-- 3.debug日志输出文件 -->
+    <appender name="debugAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/debugCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="DEBUG"/>
+            <param name="LevelMax" value="DEBUG"/>
+        </filter>
+    </appender>
+
+    <!-- 4.event日志输出文件 -->
+    <appender name="eventAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/eventCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 5.inOut日志输出文件 -->
+    <appender name="inOutAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/inoutCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 6.outIn日志输出文件 -->
+    <appender name="outInAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/outinCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 7.message日志输出文件 -->
+    <appender name="messageAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/messageCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 8.checkList日志输出文件 -->
+    <appender name="checkListAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/checkListCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 9.cache日志输出文件 -->
+    <appender name="cacheAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/cacheCollect.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- ///////////////////////////////收集日志end///////////////////////////////// -->
+
+
+    <!-- ///////////////////////////////查看日志begin///////////////////////////////// -->
+
+    <!-- 1.异常日志 -->
+    <appender name="errorViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/error.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR"/>
+            <param name="LevelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <!-- 2.warn日志输出文件 -->
+    <appender name="warnViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/warn.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+            <param name="LevelMax" value="WARN"/>
+        </filter>
+    </appender>
+
+    <!-- 3.debug日志输出文件 -->
+    <appender name="debugViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/debug.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="DEBUG"/>
+            <param name="LevelMax" value="DEBUG"/>
+        </filter>
+    </appender>
+
+    <!-- 4.event日志输出文件 -->
+    <appender name="eventViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/event.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 5.inOut日志输出文件 -->
+    <appender name="inOutViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/in_out.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 6.outIn日志输出文件 -->
+    <appender name="outInViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/out_in.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 7.message日志输出文件 -->
+    <appender name="messageViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/message.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 8.checkList日志输出文件 -->
+    <appender name="checkListViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/checkList.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 9.缓存日志 -->
+    <appender name="cacheViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/cache.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!-- 10.报警日志 -->
+    <appender name="alarmViewAppender"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/alarm.log"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d][%X{clientIP}] - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+    <!-- ///////////////////////////////查看日志end///////////////////////////////// -->
+
+    <root>
+        <level value="ERROR"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="fileAppender"/>
+    </root>
+
+</log4j:configuration>
